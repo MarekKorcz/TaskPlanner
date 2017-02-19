@@ -3,9 +3,12 @@
 namespace TaskPlannerBundle\Controller;
 
 use TaskPlannerBundle\Entity\Category;
+use TaskPlannerBundle\Entity\User;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Category controller.
@@ -21,10 +24,17 @@ class CategoryController extends Controller
      * @Method("GET")
      */
     public function indexAction()
-    {
+    {        
+        $user = $this->container
+            ->get('security.context')
+            ->getToken()
+            ->getUser()
+        ;
+        
         $em = $this->getDoctrine()->getManager();
-
-        $categories = $em->getRepository('TaskPlannerBundle:Category')->findAll();
+        $repo = $em->getRepository('TaskPlannerBundle:Category');
+        
+        $categories = $repo->displayLogedUsersCategories($user);
 
         return $this->render('category/index.html.twig', array(
             'categories' => $categories,
@@ -42,13 +52,27 @@ class CategoryController extends Controller
         $category = new Category();
         $form = $this->createForm('TaskPlannerBundle\Form\CategoryType', $category);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($category);
-            $em->flush($category);
+            
+            $category = $form->getData();
+            
+            $user = $this->container
+                ->get('security.context')
+                ->getToken()
+                ->getUser()
+            ;
+            
+            if($user instanceof User){
+            
+                $category->setUser($user);
+                
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($category);
+                $em->flush($category);
 
-            return $this->redirectToRoute('category_show', array('id' => $category->getId()));
+                return $this->redirectToRoute('category_show', array('id' => $category->getId()));
+            }
         }
 
         return $this->render('category/new.html.twig', array(
@@ -65,6 +89,9 @@ class CategoryController extends Controller
      */
     public function showAction(Category $category)
     {
+        
+        $this->checkAccessAndGetUser($category);
+        
         $deleteForm = $this->createDeleteForm($category);
 
         return $this->render('category/show.html.twig', array(
@@ -81,6 +108,8 @@ class CategoryController extends Controller
      */
     public function editAction(Request $request, Category $category)
     {
+        $this->checkAccessAndGetUser($category);
+        
         $deleteForm = $this->createDeleteForm($category);
         $editForm = $this->createForm('TaskPlannerBundle\Form\CategoryType', $category);
         $editForm->handleRequest($request);
@@ -132,5 +161,21 @@ class CategoryController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+    
+    private function checkAccessAndGetUser(Category $category){
+        
+        $user = $this->container
+            ->get('security.context')
+            ->getToken()
+            ->getUser()
+        ;
+        
+        if($category->getUser() != $user){
+            
+            throw $this->createAccessDeniedException();
+        }
+        
+        return $user;
     }
 }

@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    
+    public function displayLogedUsersCategories($userId) {
+        
+        $category = $this->getEntityManager()->createQuery(
+        'SELECT c FROM TaskPlannerBundle:Category c WHERE c.user = :userId'
+        )->setParameter('userId', $userId)
+        ->getResult();
+        
+        return $category;
+    }
 }

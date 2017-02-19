@@ -81,4 +81,27 @@ class Category
     {
         return $this->name;
     }
+    
+    /**
+     * Set user
+     *
+     * @param \AddressBookBundle\Entity\User $user
+     * @return Category
+     */
+    public function setUser(\TaskPlannerBundle\Entity\User $user){
+        
+        $this->user = $user;
+        
+        return $this;
+    }
+    
+    /**
+     * Get user
+     *
+     * @return \AddressBookBundle\Entity\User 
+     */
+    public function getuser(){
+        
+        return $this->user;
+    }
 }
