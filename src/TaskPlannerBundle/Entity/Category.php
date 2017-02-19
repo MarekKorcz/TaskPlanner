@@ -27,6 +27,12 @@ class Category
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="categories")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     */
+    private $user;
 
 
     /**

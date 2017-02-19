@@ -55,6 +55,12 @@ class Task
      * @ORM\Column(name="attach", type="string", length=255)
      */
     private $attach;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="tasks")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     */
+    private $user;
 
 
     /**

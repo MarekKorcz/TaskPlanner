@@ -34,6 +34,12 @@ class Message
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     */
+    private $user;
 
 
     /**

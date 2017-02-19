@@ -21,6 +21,21 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="user", cascade={"All"})
+     */
+    private $categories;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="user", cascade={"All"})
+     */
+    private $messages;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="user", cascade={"All"})
+     */
+    private $tasks;
 
 
     /**
@@ -32,6 +47,7 @@ class User extends BaseUser
     {
         return $this->id;
     }
+    
     
     public function __construct(){
         
