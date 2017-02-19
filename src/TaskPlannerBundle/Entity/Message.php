@@ -25,6 +25,13 @@ class Message
      * @var string
      *
      * @ORM\Column(name="text", type="string", length=255)
+     * 
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 30,
+     *      minMessage = "Your message must be at least {{ limit }} characters long",
+     *      maxMessage = "Your message cannot be longer than {{ limit }} characters"
+     * )
      */
     private $text;
 
@@ -32,6 +39,8 @@ class Message
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     * 
+     * @Assert\DateTime()
      */
     private $date;
     
