@@ -85,7 +85,7 @@ class Category
     /**
      * Set user
      *
-     * @param \AddressBookBundle\Entity\User $user
+     * @param \TaskPlannerBundle\Entity\User $user
      * @return Category
      */
     public function setUser(\TaskPlannerBundle\Entity\User $user){
@@ -98,9 +98,9 @@ class Category
     /**
      * Get user
      *
-     * @return \AddressBookBundle\Entity\User 
+     * @return \TaskPlannerBundle\Entity\User 
      */
-    public function getuser(){
+    public function getUser(){
         
         return $this->user;
     }
