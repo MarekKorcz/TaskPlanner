@@ -48,6 +48,13 @@ class Task
      * @ORM\Column(name="deadline", type="datetime")
      */
     private $deadline;
+    
+    /**
+     * @var int
+     * 
+     * @ORM\Column(name="priority", type="integer")
+     */
+    private $priority;
 
     /**
      * @var string
@@ -175,6 +182,28 @@ class Task
     public function getDeadline()
     {
         return $this->deadline;
+    }
+    
+    /**
+     * Set priority
+     *
+     * @return Task
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer 
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 
     /**
