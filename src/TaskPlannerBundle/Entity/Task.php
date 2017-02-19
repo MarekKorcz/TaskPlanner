@@ -53,7 +53,6 @@ class Task
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
-     * @ORM\Column(name="name", type="string", length=255)
      * 
      * @Assert\DateTime()
      */
