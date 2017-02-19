@@ -61,6 +61,18 @@ class Task
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="task", cascade={"All"})
+     */
+    private $messages;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="tasks")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     */
+    private $category;
+    
 
 
     /**

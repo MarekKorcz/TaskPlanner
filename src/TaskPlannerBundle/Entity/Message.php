@@ -40,6 +40,12 @@ class Message
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Task", inversedBy="messages")
+     * @ORM\JoinColumn(name="task_id", referencedColumnName="id", nullable=false)
+     */
+    private $task;
 
 
     /**

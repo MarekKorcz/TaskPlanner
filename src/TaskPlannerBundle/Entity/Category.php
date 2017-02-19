@@ -33,6 +33,11 @@ class Category
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="category", cascade={"All"})
+     */
+    private $tasks;
 
 
     /**
