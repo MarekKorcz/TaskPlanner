@@ -25,6 +25,13 @@ class Task
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * 
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 30,
+     *      minMessage = "Your task name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your task name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $name;
 
@@ -32,6 +39,13 @@ class Task
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
+     * 
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Your description must be at least {{ limit }} characters long",
+     *      maxMessage = "Your description cannot be longer than {{ limit }} characters"
+     * )
      */
     private $description;
 
@@ -39,6 +53,9 @@ class Task
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="name", type="string", length=255)
+     * 
+     * @Assert\DateTime()
      */
     private $date;
 
@@ -46,6 +63,8 @@ class Task
      * @var \DateTime
      *
      * @ORM\Column(name="deadline", type="datetime")
+     * 
+     * @Assert\DateTime()
      */
     private $deadline;
     
@@ -53,6 +72,10 @@ class Task
      * @var int
      * 
      * @ORM\Column(name="priority", type="integer")
+     * 
+     * @Assert\NotEqualTo(
+     *     value = 0
+     * )
      */
     private $priority;
 
@@ -60,6 +83,11 @@ class Task
      * @var string
      *
      * @ORM\Column(name="attach", type="string", length=255)
+     * 
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypesMessage = "Max file size connot exceed 1024kb"
+     * )
      */
     private $attach;
     
