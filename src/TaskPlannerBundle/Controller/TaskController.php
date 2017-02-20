@@ -3,6 +3,7 @@
 namespace TaskPlannerBundle\Controller;
 
 use TaskPlannerBundle\Entity\Task;
+use TaskPlannerBundle\Form\TaskType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -40,8 +41,18 @@ class TaskController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->container
+            ->get('security.context')
+            ->getToken()
+            ->getUser()
+        ;
+        
         $task = new Task();
-        $form = $this->createForm('TaskPlannerBundle\Form\TaskType', $task);
+        $form = $this->createForm(new TaskType(), $task, array(
+                                    'attr' => array(
+                                        'userId' => $user->getId()
+        )));
+                
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

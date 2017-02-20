@@ -256,4 +256,27 @@ class Task
     {
         return $this->attach;
     }
+    
+    /**
+     * Set category
+     *
+     * @param \TaskPlannerBundle:Category $category
+     * @return Category
+     */
+    public function setCategory(\TaskPlannerBundle\Entity\Category $category){
+        
+        $this->category = $category;
+        
+        return $this;
+    }
+    
+    /**
+     * Get category
+     *
+     * @return \AddressBookBundle\Entity\category 
+     */
+    public function getCategory(){
+        
+        return $this->category;
+    }
 }
