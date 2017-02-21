@@ -49,9 +49,8 @@ class TaskController extends Controller
         
         $task = new Task();
         $form = $this->createForm(new TaskType(), $task, array(
-                                    'attr' => array(
-                                        'userId' => $user->getId()
-        )));
+                                    'attr' => ['userId' => $user->getId()]
+        ));
                 
         $form->handleRequest($request);
 

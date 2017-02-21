@@ -2,6 +2,8 @@
 
 namespace TaskPlannerBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -25,7 +27,7 @@ class TaskType extends AbstractType
             ->add('category', EntityType::class, array(
                 'class' => 'TaskPlannerBundle:Category',
                 'query_builder' => function(EntityRepository $er) use($options){
-                        return $er->displayLogedUsersCategories($options['userId']);
+                    return $er->displayLogedUsersCategories($options['userId']);
                 },
                 'choice_label' => 'name',
             ))
