@@ -27,7 +27,7 @@ class TaskType extends AbstractType
             ->add('category', EntityType::class, array(
                 'class' => 'TaskPlannerBundle:Category',
                 'query_builder' => function(EntityRepository $er) use($options){
-                    return $er->displayLogedUsersCategories($options['userId']);
+                    return $er->displayLogedUsersCategories($options['attr']['userId']);
                 },
                 'choice_label' => 'name',
             ))
