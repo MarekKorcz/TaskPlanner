@@ -1,9 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body %}
+<div class="container">    
     <h1>Tasks list</h1>
-
-    <table>
+    <div>
+    <a href="{{ path('fos_user_security_logout') }}">
+        <button class="btn btn-warning">
+            <strong>Logout</strong>
+        </button>
+    </a>
+    </div>
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -41,9 +48,10 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('task_new') }}">Create a new task</a>
-        </li>
-    </ul>
+    <a href="{{ path('task_new') }}"
+        <button class="btn btn-success">
+            <strong>Create new Task</strong>
+        </button>
+    </a>
+</div>
 {% endblock %}
