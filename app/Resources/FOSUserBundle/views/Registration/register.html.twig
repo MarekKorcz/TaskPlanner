@@ -1,0 +1,29 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Registration Form{% endblock %}
+
+{% block body %}
+  
+<div class="container">  
+    <h1>Welcome to TaskPlanner Registration Page</h1>
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>Please, register:</h2>
+            {% block fos_user_content %}
+                {% include "@FOSUser/Registration/register_content.html.twig" %}
+            {% endblock fos_user_content %}
+            <h3>
+                <a href="{{ path('fos_user_security_login') }}">
+                    Or login
+                </a>
+            </h3>
+        </div>
+        <div class="col-xs-6">
+            {% block image %}  
+                <img src="{{ asset('img/sticky-notes-2.jpg') }}" alt="Sticky-notes" 
+                     width="500" height="500"/>
+            {% endblock image %}
+        </div>
+    </div>
+</div>
+{% endblock %}
