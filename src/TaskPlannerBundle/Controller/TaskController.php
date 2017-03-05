@@ -56,6 +56,18 @@ class TaskController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $file = $task->getAttach();
+
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            $file->move(
+                $this->getParameter('attach_directory'),
+                $fileName
+            );
+
+            $task->setAttach($fileName);
+ 
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush($task);

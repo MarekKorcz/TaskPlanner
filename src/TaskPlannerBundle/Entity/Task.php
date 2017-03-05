@@ -298,8 +298,13 @@ class Task
      *
      * @return \AddressBookBundle\Entity\user 
      */
-    public function getuser(){
+    public function getUser(){
         
         return $this->user;
+    }
+    
+    public function getMessages(){
+        
+        return $this->messages;
     }
 }

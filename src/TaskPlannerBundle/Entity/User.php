@@ -53,4 +53,9 @@ class User extends BaseUser
         
         parent::__construct();
     }
+    
+    public function getTasks() {
+        
+        return $this->tasks;
+    }
 }
