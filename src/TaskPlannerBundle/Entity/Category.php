@@ -104,4 +104,14 @@ class Category
         
         return $this->user;
     }
+    
+     public function setTasks($task){
+        
+        $this->tasks = $task;
+    }
+    
+    public function getTasks(){
+        
+        return $this->tasks;
+    }
 }

@@ -1,16 +1,26 @@
-{% extends 'base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body %}
-    <h1>Category creation</h1>
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
-        </li>
-    </ul>
+<div class="container">
+    <h1>Create Category</h1>
+    <div>
+        <button class="btn btn-primary" id="go-back">
+            <strong>Back</strong>
+        </button>
+    </div><br>
+    
+    {{ form_start(form.name) }}
+        <div class="form">
+            {{ form_label(form.name, 'Name:') }}<br>
+            {{ form_widget(form.name) }}
+        </div>
+        <div class="form" style="margin-top: 5px">
+            <input type="submit" value="Create" />
+        </div>
+    {{ form_end(form.name) }}
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/app.js') }}"></script>
 {% endblock %}

@@ -19,10 +19,7 @@
             <h2>{{ category.name }}</h2>
             <table class="table">
                 <tbody>
-                    <tr>        
-                        <th>
-                            <p>Tasks</p>
-                        </th>
+                    <tr>
                         <td>
                             Name
                         </td>
@@ -41,32 +38,41 @@
                         <td>
                             Image
                         </td>
+                        <td>
+                            Action
+                        </td>
                     </tr>
-                    <tr>
-                        {% for user in category.user %}
-                            {% for task in user.task %}
-                                <th></th>
-                                <td>    
-                                    {{ task.name }}
-                                </td>
-                                <td>    
-                                    {{ task.description }}
-                                </td>
-                                <td>    
-                                    {{ task.date }}
-                                </td>
-                                <td>    
-                                    {{ task.deadline }}
-                                </td>
-                                <td>    
-                                    {{ task.priority }}
-                                </td>
-                                <td>    
-                                    {{ task.attach }}
-                                </td>
-                            {% endfor %}
-                        {% endfor %}
-                    </tr>
+                    {% for task in category.tasks %}
+                        <tr>
+                            <td>    
+                                <a href="{{ path('task_show', {'id':task.id}) }}">
+                                    <strong>{{ task.name }}</strong>
+                                </a>
+                            </td>
+                            <td>    
+                                {{ task.description }}
+                            </td>
+                            <td>    
+                                {% if task.date %}{{ task.date|date('Y-m-d') }}{% endif %}
+                            </td>
+                            <td>
+                                {% if task.deadline %}{{ task.deadline|date('Y-m-d') }}{% endif %}
+                            </td>
+                            <td>    
+                                {{ task.priority }}
+                            </td>
+                            <td>    
+                                {{ task.attach }}
+                            </td>
+                            <td>
+                                <a href="{{ path('task_show', {'id':task.id}) }}">
+                                    <button class="btn btn-xs btn-success">
+                                        <strong>Show</strong>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}        
                 </tbody>
             </table>
         </div>

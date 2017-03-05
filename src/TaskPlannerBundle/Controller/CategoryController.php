@@ -54,7 +54,7 @@ class CategoryController extends Controller
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $category = $form->getData();
             
             $user = $this->container
@@ -64,7 +64,7 @@ class CategoryController extends Controller
             ;
             
             if($user instanceof User){
-            
+                         
                 $category->setUser($user);
                 
                 $em = $this->getDoctrine()->getManager();
@@ -75,7 +75,8 @@ class CategoryController extends Controller
             }
         }
 
-        return $this->render('category/new.html.twig', array(
+        return $this->redirectToRoute('category_show', array(
+            'id' => $category->getId(),
             'category' => $category,
             'form' => $form->createView(),
         ));
@@ -89,7 +90,7 @@ class CategoryController extends Controller
      */
     public function showAction(Category $category)
     {
-        
+
         $this->checkAccessAndGetUser($category);
         
         $deleteForm = $this->createDeleteForm($category);
@@ -117,7 +118,7 @@ class CategoryController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
+            return $this->redirectToRoute('category_index');
         }
 
         return $this->render('category/edit.html.twig', array(
