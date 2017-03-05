@@ -146,6 +146,13 @@ class CategoryController extends Controller
 
         return $this->redirectToRoute('category_index');
     }
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * Creates a form to delete a category entity.
@@ -162,6 +169,15 @@ class CategoryController extends Controller
             ->getForm()
         ;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     private function checkAccessAndGetUser(Category $category){
         

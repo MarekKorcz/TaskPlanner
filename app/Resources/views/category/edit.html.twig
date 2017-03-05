@@ -1,21 +1,29 @@
-{% extends 'base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body %}
-    <h1>Category edit</h1>
+<div class="container">
+    <h1>Edit Category</h1>
+    <div>
+        <button class="btn btn-primary" id="go-back" style="display: inline; float: left; margin-right: 5px">
+            <strong>Back to Category's page</strong>
+        </button>
+        {{ form_start(delete_form) }}
+            <input type="submit" style="font-weight: bold; display: inline" value="Delete" class="btn btn-warning confirm-delete" id="go-back">
+        {{ form_end(delete_form) }}
+    </div>
 
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <div class="form">
+            {{ form_label(edit_form.name, 'Name:') }}<br>
+            {{ form_widget(edit_form.name) }}
+        </div>
+        <div style="margin-top: 5px">
+            <input type="submit" value="Edit" />
+        </div>
     {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/app.js') }}"></script>
 {% endblock %}

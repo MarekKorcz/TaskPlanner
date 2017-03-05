@@ -3,39 +3,49 @@
 {% block title %}Category Page{% endblock %}
 
 {% block body %}
+<div class="container">  
     <h1>Categories list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Actions</th>
+                <th><h4>Name</h4></th>
+                <th><h4>Actions</h4></th>
             </tr>
         </thead>
         <tbody>
         {% for category in categories %}
             <tr>
-                <td><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
-                <td>{{ category.name }}</td>
+                <td><h2>{{ category.name }}</h2></td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('category_show', { 'id': category.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('category_edit', { 'id': category.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <div style="padding: 20px">
+                        <a href="{{ path('category_show', { 'id': category.id }) }}">
+                            <button class="btn btn-info">
+                                <strong>Show</strong>
+                            </button>
+                        </a>
+                        <a href="{{ path('category_edit', { 'id': category.id }) }}">
+                            <button class="btn btn-warning">
+                                <strong>Edit</strong>
+                            </button>
+                        </a>
+                        <a href="{{ path('task_new') }}"
+                            <button class="btn btn-success">
+                                <strong>Add new Task</strong>
+                            </button>
+                        </a>   
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('category_new') }}">Create a new category</a>
-        </li>
-    </ul>
+    <div>
+    <a href="{{ path('category_new') }}"
+        <button class="btn btn-success">
+            <strong>Create new Category</strong>
+        </button>
+    </a>
+    </div>
+</div>  
 {% endblock %}

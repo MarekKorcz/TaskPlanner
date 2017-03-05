@@ -1,32 +1,79 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Category</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ category.name }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('category_edit', { 'id': category.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+<div class="container">
+    
+    <div style="margin-top: 30px">
+        <a href="{{ path('category_index') }}">
+            <button class="btn btn-primary" style="display: inline; float: left; margin-right: 5px">
+                <strong>Back to Category's page</strong>
+            </button>
+        </a>
+        {{ form_start(delete_form) }}
+            <input type="submit" style="font-weight: bold; display: inline" value="Delete" class="btn btn-warning confirm-delete" id="go-back">
+        {{ form_end(delete_form) }}
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Category</h1>
+            <h2>{{ category.name }}</h2>
+            <table class="table">
+                <tbody>
+                    <tr>        
+                        <th>
+                            <p>Tasks</p>
+                        </th>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            Description
+                        </td>
+                        <td>
+                            Date
+                        </td>
+                        <td>
+                            Deadline
+                        </td>
+                        <td>
+                            Priority
+                        </td>
+                        <td>
+                            Image
+                        </td>
+                    </tr>
+                    <tr>
+                        {% for user in category.user %}
+                            {% for task in user.task %}
+                                <th></th>
+                                <td>    
+                                    {{ task.name }}
+                                </td>
+                                <td>    
+                                    {{ task.description }}
+                                </td>
+                                <td>    
+                                    {{ task.date }}
+                                </td>
+                                <td>    
+                                    {{ task.deadline }}
+                                </td>
+                                <td>    
+                                    {{ task.priority }}
+                                </td>
+                                <td>    
+                                    {{ task.attach }}
+                                </td>
+                            {% endfor %}
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/app.js') }}"></script>
 {% endblock %}
