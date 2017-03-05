@@ -48,6 +48,7 @@ class TaskController extends Controller
         ;
         
         $task = new Task();
+        $task->setUser($user);
         $form = $this->createForm(new TaskType(), $task, array(
                                     'attr' => ['userId' => $user->getId()]
         ));
@@ -76,6 +77,14 @@ class TaskController extends Controller
      */
     public function showAction(Task $task)
     {
+        $user = $this->container
+            ->get('security.context')
+            ->getToken()
+            ->getUser()
+        ;
+        
+        $task->setUser($user);
+        
         $deleteForm = $this->createDeleteForm($task);
 
         return $this->render('task/show.html.twig', array(
@@ -92,8 +101,18 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
+        $user = $this->container
+            ->get('security.context')
+            ->getToken()
+            ->getUser()
+        ;
+        
+        $task->setUser($user);
+        
         $deleteForm = $this->createDeleteForm($task);
-        $editForm = $this->createForm('TaskPlannerBundle\Form\TaskType', $task);
+        $editForm = $this->createForm('TaskPlannerBundle\Form\TaskType', $task, array(
+                                    'attr' => ['userId' => $user->getId()]
+        ));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

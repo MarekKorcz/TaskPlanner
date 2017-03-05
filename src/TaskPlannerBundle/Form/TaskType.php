@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityRepository;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,10 +22,10 @@ class TaskType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('date')
-            ->add('deadline')
+            ->add('date', DateType::class, ['empty_data' => new \DateTime()])
+            ->add('deadline', DateType::class, ['empty_data' => new \DateTime()])
             ->add('priority')
-            ->add('attach')
+            ->add('attach', FileType::class, array('data_class' => null))
             ->add('category', EntityType::class, array(
                 'class' => 'TaskPlannerBundle:Category',
                 'query_builder' => function(EntityRepository $er) use($options){

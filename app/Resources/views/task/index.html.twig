@@ -13,9 +13,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Category</th>
                 <th>Date</th>
                 <th>Deadline</th>
                 <th>Priority</th>
@@ -26,22 +26,24 @@
         <tbody>
         {% for task in tasks %}
             <tr>
-                <td><a href="{{ path('task_show', { 'id': task.id }) }}">{{ task.id }}</a></td>
                 <td>{{ task.name }}</td>
                 <td>{{ task.description }}</td>
+                <td>{{ task.category.name }}
                 <td>{% if task.date %}{{ task.date|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if task.deadline %}{{ task.deadline|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ task.priority }}</td>
                 <td>{{ task.attach }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('task_show', { 'id': task.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('task_edit', { 'id': task.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('task_show', { 'id': task.id }) }}">
+                        <button class="btn btn-info">
+                            <strong>Show</strong>
+                        </button>
+                    </a>
+                    <a href="{{ path('task_edit', { 'id': task.id }) }}">
+                        <button class="btn btn-warning">
+                            <strong>Edit</strong>
+                        </button>
+                    </a>
                 </td>
             </tr>
         {% endfor %}

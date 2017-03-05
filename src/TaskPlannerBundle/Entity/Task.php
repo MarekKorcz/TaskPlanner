@@ -279,4 +279,27 @@ class Task
         
         return $this->category;
     }
+    
+    /**
+     * Set user
+     *
+     * @param \TaskPlannerBundle:User $user
+     * @return User
+     */
+    public function setUser(\TaskPlannerBundle\Entity\User $user){
+        
+        $this->user = $user;
+        
+        return $this;
+    }
+    
+    /**
+     * Get user
+     *
+     * @return \AddressBookBundle\Entity\user 
+     */
+    public function getuser(){
+        
+        return $this->user;
+    }
 }
