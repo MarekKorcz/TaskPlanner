@@ -2,6 +2,8 @@
 
 namespace TaskPlannerBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,9 +17,7 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('text')
-            ->add('date')
-            ->add('user')
-            ->add('task')
+            ->add('date', DateType::class, ['empty_data' => new \DateTime()])
         ;
     }
     

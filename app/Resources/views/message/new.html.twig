@@ -1,16 +1,33 @@
 {% extends 'base.html.twig' %}
 
+
+{#data widget#}
+
+
+
 {% block body %}
-    <h1>Message creation</h1>
+<div class="container">
+    <h1>Creation Message</h1>
+    <div class="form">
+        <a href="{{ path('task_index', {'id':message.task.id}) }}">
+            <button class="btn btn-success">
+                <strong>Back to the Task</strong>
+            </button>
+        </a>
+    </div><br>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <div class="form">
+            {{ form_label(form.text, 'Text:') }}<br>
+            {{ form_widget(form.text) }}
+        </div>
+        <div class="form">
+            {{ form_label(form.date, 'Date:') }}<br>
+            {{ form_widget(form.date) }}
+        </div>
+        <div class="form" style="margin-top: 5px">
+            <input type="submit" value="Create" />
+        </div>
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('message_index') }}">Back to the list</a>
-        </li>
-    </ul>
+</div>
 {% endblock %}

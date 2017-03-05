@@ -113,4 +113,29 @@ class Message
     {
         return $this->date;
     }
+    
+    public function setUser($user){
+        
+        $this->user = $user;
+    }
+    
+    /**
+     * Get user
+     *
+     * @return \AddressBookBundle\Entity\user 
+     */
+    public function getUser(){
+        
+        return $this->user;
+    }
+    
+    public function setTask($task){
+        
+        $this->task = $task;
+    }
+    
+    public function getTask(){
+        
+        return $this->task;
+    }
 }

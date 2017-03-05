@@ -3,9 +3,11 @@
 namespace TaskPlannerBundle\Controller;
 
 use TaskPlannerBundle\Entity\Message;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Message controller.
@@ -15,31 +17,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 class MessageController extends Controller
 {
     /**
-     * Lists all message entities.
-     *
-     * @Route("/", name="message_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $messages = $em->getRepository('TaskPlannerBundle:Message')->findAll();
-
-        return $this->render('message/index.html.twig', array(
-            'messages' => $messages,
-        ));
-    }
-
-    /**
      * Creates a new message entity.
      *
-     * @Route("/new", name="message_new")
+     * @Route("/new/{taskId}", name="message_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $taskId)
     {
+        $repo = $this->getDoctrine()->getRepository('TaskPlannerBundle:Task');
+        $task = $repo->find($taskId);
+        
         $message = new Message();
+        
+        $message->setTask($task);
+        $message->setUser($task->getUser());
+        
         $form = $this->createForm('TaskPlannerBundle\Form\MessageType', $message);
         $form->handleRequest($request);
 
@@ -48,7 +40,7 @@ class MessageController extends Controller
             $em->persist($message);
             $em->flush($message);
 
-            return $this->redirectToRoute('message_show', array('id' => $message->getId()));
+            return $this->redirectToRoute('task_show', array('id' => $task->getId()));
         }
 
         return $this->render('message/new.html.twig', array(
@@ -115,7 +107,12 @@ class MessageController extends Controller
             $em->flush($message);
         }
 
-        return $this->redirectToRoute('message_index');
+        return $this->redirectToRoute(
+            'task_index', 
+            [
+                'id' => $message->getTask()->getId()
+            ]
+        );
     }
 
     /**
