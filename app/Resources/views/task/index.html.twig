@@ -19,7 +19,7 @@
                 <th>Date</th>
                 <th>Deadline</th>
                 <th>Priority</th>
-                <th>Attach</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -37,10 +37,10 @@
                         {{ task.category.name }}
                     </a>
                 </td>
-                <td>{% if task.date %}{{ task.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if task.deadline %}{{ task.deadline|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if task.date %}{{ task.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if task.deadline %}{{ task.deadline|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ task.priority }}</td>
-                <td>{{ task.attach }}</td>
+                <td><a href="/uploads/{{ task.attach }}">Download</a></td>
                 <td>
                     <a href="{{ path('task_show', { 'id': task.id }) }}">
                         <button class="btn btn-info">

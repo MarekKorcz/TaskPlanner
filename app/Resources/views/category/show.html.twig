@@ -62,7 +62,7 @@
                                 {{ task.priority }}
                             </td>
                             <td>    
-                                {{ task.attach }}
+                                <a href="/uploads/{{ task.attach }}">Download</a>
                             </td>
                             <td>
                                 <a href="{{ path('task_show', {'id':task.id}) }}">
@@ -76,6 +76,13 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div>
+        <a href="{{ path('task_new') }}">
+            <button class="btn btn-success">
+                <strong>Add Task</strong>
+            </button>
+        </a>
     </div>
 </div>
 {% endblock %}

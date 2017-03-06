@@ -38,18 +38,18 @@
                     </tr>
                     <tr>
                         <th>Date</th>
-                        <td>{% if task.date %}{{ task.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if task.date %}{{ task.date|date('Y-m-d') }}{% endif %}</td>
                     </tr>
                     <tr>
                         <th>Deadline</th>
-                        <td>{% if task.deadline %}{{ task.deadline|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if task.deadline %}{{ task.deadline|date('Y-m-d') }}{% endif %}</td>
                     </tr>
                     <tr>
                         <th>Priority</th>
                         <td>{{ task.priority }}</td>
                     </tr>
                     <tr>
-                        <th>Attach</th>
+                        <th>Image</th>
                         <td><a href="/uploads/{{ task.attach }}">Download</a></td>
                     </tr>
                 </tbody>
@@ -62,7 +62,7 @@
                     <tr>
                         <th>{{ message.text }}</th>
                         <td>Posted: 
-                            <strong>{% if message.date %}{{ message.date|date('Y-m-d H:i:s') }}{% endif %}</strong>
+                            <strong>{% if message.date %}{{ message.date|date('Y-m-d') }}{% endif %}</strong>
                         </td>
                     </tr>
                 {% endfor %}
@@ -70,7 +70,7 @@
                     
             <a href="{{ path('message_new', {'taskId' : task.id}) }}">
                 <button class="btn btn-success">
-                    <strong>New message</strong>
+                    <strong>New comment</strong>
                 </button>
             </a>
         </div>
